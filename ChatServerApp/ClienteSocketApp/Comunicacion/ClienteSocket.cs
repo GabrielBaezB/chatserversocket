@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClienteSocket.Comunicacion
+namespace ClienteSocketApp.Comunicacion
 {
     public class ClienteSocket
     {
@@ -16,27 +16,26 @@ namespace ClienteSocket.Comunicacion
         private Socket comServidor;
         private StreamReader reader;
         private StreamWriter writer;
-   
-     public ClienteSocket(int puerto, string ip)
-     {
-        this.puerto = puerto;
-        this.ip = ip;
-     }
+
+        public ClienteSocket(int puerto, string ip)
+        {
+            this.puerto = puerto;
+            this.ip = ip;
+        }
 
         public bool Conectar()
         {
             try
             {
                 this.comServidor = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(ip), puerto);
-                this.comServidor.Connect(endPoint);
+                IPEndPoint endpoint = new IPEndPoint(IPAddress.Parse(ip), puerto);
+                this.comServidor.Connect(endpoint);
                 Stream stream = new NetworkStream(this.comServidor);
                 this.writer = new StreamWriter(stream);
                 this.reader = new StreamReader(stream);
                 return true;
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -51,9 +50,8 @@ namespace ClienteSocket.Comunicacion
                 this.writer.Flush();
                 return true;
             }
-            catch (Exception ex)
+            catch (IOException ex)
             {
-
                 return false;
             }
         }
@@ -64,9 +62,8 @@ namespace ClienteSocket.Comunicacion
             {
                 return this.reader.ReadLine().Trim();
             }
-            catch (Exception ex)
+            catch (IOException ex)
             {
-
                 return null;
             }
         }
@@ -75,6 +72,6 @@ namespace ClienteSocket.Comunicacion
         {
             this.comServidor.Close();
         }
-    }
 
+    }
 }

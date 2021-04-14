@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("ClienteSocket")]
+[assembly: AssemblyTitle("ClienteSocketApp")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ClienteSocket")]
+[assembly: AssemblyProduct("ClienteSocketApp")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // El siguiente GUID sirve como id. de typelib si este proyecto se expone a COM.
-[assembly: Guid("fc8d7be6-2076-4908-b9d4-8677f4e23301")]
+[assembly: Guid("de63db49-6a0f-41f9-b03f-c1fdf99167ed")]
 
 // La información de versión de un ensamblado consta de los cuatro valores siguientes:
 //

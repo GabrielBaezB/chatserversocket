@@ -1,57 +1,48 @@
-﻿using System;
+﻿using ClienteSocketApp.Comunicacion;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Configuration;
-using System.Net;
-using System.Net.Sockets;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClienteSocket
+namespace ClienteSocketApp
 {
     class Program
     {
         static void Main(string[] args)
         {
+            string ip = ConfigurationManager.AppSettings["ip"];
             int puerto = Convert.ToInt32(ConfigurationManager.AppSettings["puerto"]);
-            Console.WriteLine("Iniciando servidor {0}", puerto);
-            ServerSocket servidor = new ServerSocket(puerto);
 
-            if (servidor.Iniciar())
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Iniciar conexion a servidor {0} en el puerto {1}", ip, puerto);
+            ClienteSocket clienteSocket = new ClienteSocket(puerto, ip);
+
+            if(clienteSocket.Conectar())
             {
-                while (true)
+                //protocolo de comunicacion
+                string mensaje = "";
+                while(mensaje.ToLower() != "chao")
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine("Esperando conexion de Cliente");
-                    if (servidor.ObtenerCliente())
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                        Console.WriteLine("Cliente Conectado!");
-                      
-                        string mensaje = "";
-                        while (mensaje.ToLower() != "chao")
-                        {
-                            mensaje = servidor.Leer();
-                            Console.WriteLine("C:{0}", mensaje);
-                            if (mensaje.ToLower() != "chao")
-                            {
-                                Console.WriteLine("Digame lo que quiere decirle guruguru");
-                                mensaje = Console.ReadLine().Trim();
-                                Console.WriteLine("S:{0}", mensaje);
-                                servidor.Escribir(mensaje);
-                            }
-                        }
-                        servidor.CerrarConexion();
+                    Console.WriteLine("Ingrese Mensaje");
+                    mensaje = Console.ReadLine().Trim();
+                    clienteSocket.Escribir(mensaje);
 
+                    if (mensaje.ToLower() != "chao")
+                    {
+                        mensaje = clienteSocket.Leer();
+                        Console.WriteLine("S:{0}", mensaje);                   
                     }
                 }
-            }
-            else
+                clienteSocket.Desconectar();
+
+            }else
             {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("Error al iniciar al servidor");
-                Console.ReadKey();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Error al conectar al servidor");
             }
+
         }
     }
 }

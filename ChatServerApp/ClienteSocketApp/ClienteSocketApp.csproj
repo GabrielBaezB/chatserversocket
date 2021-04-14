@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FC8D7BE6-2076-4908-B9D4-8677F4E23301}</ProjectGuid>
+    <ProjectGuid>{DE63DB49-6A0F-41F9-B03F-C1FDF99167ED}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ClienteSocket</RootNamespace>
-    <AssemblyName>ClienteSocket</AssemblyName>
+    <RootNamespace>ClienteSocketApp</RootNamespace>
+    <AssemblyName>ClienteSocketApp</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
